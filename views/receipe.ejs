@@ -1,0 +1,46 @@
+<%- include('partials/header'); -%>
+
+<div style="text-align:center">
+    <div style="width:400px">
+        <% if(error && error.length>0){ %>
+        <div class="warning-message">
+            <div class="header">
+                <%= error %>
+            </div>
+        </div>
+        <% } %>
+        <% if(success && success.length > 0) { %>
+        <div class="success-message">
+            <div class="header">
+                <%= success%>
+            </div>
+        </div>
+        <% } %>
+    </div>
+    <h2 style="margin-top:30px;margin-bottom:10px;color:black;font-family:itallic">Receipes </h2>
+    <a href="/dashboard/newreceipe"><button type="button" class="btn btn-success">Add New Receipe</button></a>
+
+
+    <div class="receipe" style="margin-top:50px;">
+        <div>
+            <% receipe.forEach((receipe) => { %>
+            <div class="item">
+                <img class="rounded" src="<%= receipe.image %>" style="margin-top:15px;border-radius:30%" width="30%">
+                <div class="content">
+                    <div class="header">
+                        <h3><%= receipe.name %></h3>
+                    </div>
+                </div>
+                <div class="details">
+                    <a href="/dashboard/myreceipes/<%= receipe._id %>"><button type="button" class="btn btn-success" style="margin-bottom:10px;">View Details</button></a>
+                    <form action="/dashboard/myreceipes/<%= receipe._id %>?_method=DELETE" method="POST">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer'); -%>
